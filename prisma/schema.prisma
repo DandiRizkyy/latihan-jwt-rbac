@@ -19,5 +19,12 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
-  roles    Roles
+  roles    Roles  @default(user)
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  roles    Roles  @default(admin)
 }

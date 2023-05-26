@@ -9,20 +9,36 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   // @UseGuards(AuthGuard)
-  @Post('login')
-  async login(@Body('email') email:string, @Body('password') password:string) {
-    return this.authService.login(email, password);
+  @Post('login/user')
+  async loginUser(@Body('email') email:string, @Body('password') password:string) {
+    return this.authService.loginUser(email, password);
   }
 
-  @Post('register')
-  async register(@Body() createUserDto: CreateUser) {
-    return this.authService.register(createUserDto);
+  @Post('register/user')
+  async registerUser(@Body() createUserDto: CreateUser) {
+    return this.authService.registerUser(createUserDto);
+  }
+
+  @Post('login/admin')
+  async loginAdmin(@Body('email') email:string, @Body('password') password:string) {
+    return this.authService.loginAdmin(email, password);
+  }
+
+  @Post('register/admin')
+  async registerAdmin(@Body() createUserDto: CreateUser) {
+    return this.authService.registerAdmin(createUserDto);
+  }
+  
+  @UseGuards(AuthGuard)
+  @Get('profileuser')
+  getProfileUser(@Request() req) {
+    return req.user;
   }
 
   @UseGuards(RoleGuard)
   @UseGuards(AuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
+  @Get('profileadmin')
+  getProfileAdmin(@Request() req) {
     return req.user;
   }
 }
