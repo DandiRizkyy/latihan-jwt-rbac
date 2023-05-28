@@ -1,4 +1,11 @@
-import { Controller, Post, UseGuards, Request, Body, Get } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  UseGuards,
+  Request,
+  Body,
+  Get,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 import { CreateUser } from './dto/create-user.dto';
@@ -10,7 +17,10 @@ export class AuthController {
 
   // @UseGuards(AuthGuard)
   @Post('login/user')
-  async loginUser(@Body('email') email:string, @Body('password') password:string) {
+  async loginUser(
+    @Body('email') email: string,
+    @Body('password') password: string,
+  ) {
     return this.authService.loginUser(email, password);
   }
 
@@ -20,7 +30,10 @@ export class AuthController {
   }
 
   @Post('login/admin')
-  async loginAdmin(@Body('email') email:string, @Body('password') password:string) {
+  async loginAdmin(
+    @Body('email') email: string,
+    @Body('password') password: string,
+  ) {
     return this.authService.loginAdmin(email, password);
   }
 
@@ -28,7 +41,7 @@ export class AuthController {
   async registerAdmin(@Body() createUserDto: CreateUser) {
     return this.authService.registerAdmin(createUserDto);
   }
-  
+
   @UseGuards(AuthGuard)
   @Get('profileuser')
   getProfileUser(@Request() req) {

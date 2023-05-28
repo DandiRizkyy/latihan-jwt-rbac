@@ -16,10 +16,11 @@ enum Roles {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
   password String
-  roles    Roles  @default(user)
+  roles    Roles     @default(user)
+  products Product[]
 }
 
 model Admin {
@@ -28,3 +29,13 @@ model Admin {
   password String
   roles    Roles  @default(admin)
 }
+
+model Product {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+  categories  String
+  user        User?  @relation(fields: [userId], references: [id])
+  userId      Int?
+}
+
