@@ -8,7 +8,7 @@ import {
 import { Role } from '../enums/user.enums';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateUser {
+export class CreateAdmin {
   @IsEmail()
   @IsString()
   @IsNotEmpty()

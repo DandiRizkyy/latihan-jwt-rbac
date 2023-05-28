@@ -40,7 +40,7 @@ export class RoleGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
 
     if (request.user.roles !== 'admin') {
-      throw new ForbiddenException('You are not allowed to modify the data!');
+      throw new ForbiddenException("You don't have permission.");
     }
 
     return true;
