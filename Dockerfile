@@ -6,8 +6,8 @@ COPY package.json ./
 COPY pnpm-lock.yaml ./
 
 RUN npm i -g pnpm
-RUN pnpm fetch --prod
-RUN pnpm install -r --offline --prod
+RUN pnpm fetch -prod
+RUN pnpm install -r -offline -prod
 
 COPY . ./
 RUN pnpm add @nestjs/cli
