@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "linux-musl"]
 }
 
@@ -17,26 +17,42 @@ enum Roles {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  email    String    @unique
-  password String
-  roles    Roles     @default(user)
-  products Product[]
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  roles     Roles     @default(user)
+  Wishlist  Wishlist?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
 }
 
 model Admin {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
-  roles    Roles  @default(admin)
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  roles     Roles    @default(admin)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Wishlist {
+  id        Int       @id @default(autoincrement())
+  name      String
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    Int?      @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  Product   Product[]
 }
 
 model Product {
-  id          Int    @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   title       String
   description String
+  price       Decimal
   categories  String
-  user        User?  @relation(fields: [userId], references: [id])
-  userId      Int?
+  wishlist    Wishlist? @relation(fields: [wishlistId], references: [id])
+  wishlistId  Int?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
 }
-
