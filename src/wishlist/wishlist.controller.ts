@@ -10,8 +10,6 @@ export class WishlistController {
     // get wishlist by id + show relation between wishlist and product
 
     // create wishlist
-    
-    // update wishlist (PUT)
 
     // update wishlist (PATCH)
 

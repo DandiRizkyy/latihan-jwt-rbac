@@ -1,6 +1,5 @@
-import { Controller, Delete, Get, Param, ParseIntPipe, Patch } from '@nestjs/common';
+import { Controller, Delete, Get, Param, ParseIntPipe, Patch, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
-
 @Controller('user')
 export class UserController {
     constructor(private userService: UserService){}
